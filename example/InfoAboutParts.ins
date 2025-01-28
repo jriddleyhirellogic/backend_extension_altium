@@ -1,0 +1,29 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'InfoAboutParts'
+    EditorExePath     = 'InfoAboutParts.dll'
+    EditorDescription = 'Schematic Component Utility'
+    Version           = '1.0.0.0'
+    Date              = '01/25/2025'
+    HelpAboutInfo     = 'Generates reports for schematic component pins'
+    Copyright         = 'Copyright HiRel Logic'
+    SystemExtension   = True
+End
+
+EditorWindowKind
+    Name                  = 'PartsInfo'
+    NewWindowCaption      = 'Component Parts Report'
+    NewWindowExtention    = 'PartsInfo'
+    WindowKindDescription = 'Parts Report File'
+    IconName              = 'ICON_Report'
+End
+
+DocumentFilters
+    All
+        'Parts Report Document (*.PartsInfo)'
+    End
+    Documents
+        'Parts Report Document (*.PartsInfo)'
+    End
+End

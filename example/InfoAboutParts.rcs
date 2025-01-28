@@ -1,0 +1,30 @@
+PL PLInfoAboutParts:ShowInfoAboutParts
+    Command     = 'InfoAboutParts:ShowInfoAboutParts'
+    Caption     = 'Component Info Report'
+    Description = 'Generate report of schematic components'
+End
+
+Insertion MNSCH_PM_ShowInfoAboutParts
+    TargetID   = 'PUSCHMENU'
+    InsertType = 'After'
+    RefID0     = 'MNSchematic_PUSCHMENU261'
+    Link MNSchematic_PUSCHMENU262
+        PLID = 'PLInfoAboutParts:ShowInfoAboutParts'
+    End
+End
+
+Insertion MNSCH_PM_ShowInfoAboutParts
+    TargetID   = 'PUSCHMENU'
+    InsertType = 'After'
+    RefID0     = 'MNSchematic_PUSCHMENU261'
+    Link MNSchematic_PUSCHMENU263
+        PLID = 'PLInfoAboutParts:GetAllComponents'
+    End
+End
+
+Insertion MNSCH_PM_ShowInfoAboutPartsSeparator
+    TargetID   = 'PUSCHMENU'
+    InsertType = 'After'
+    RefID0     = 'MNSCH_PM_ShowInfoAboutPartsLink'
+    Separator MNSCH_PM_ShowInfoAboutPartsSeparator End
+End

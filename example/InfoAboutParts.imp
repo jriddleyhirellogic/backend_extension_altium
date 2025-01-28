@@ -1,0 +1,12 @@
+[ImplementationEditor]
+Name        = InfoAboutPartsEditor
+ModelType   = InfoAboutParts
+Description = Component Pin Report Tool
+ServerName  = InfoAboutParts
+
+[Datafiles]
+Count                    = 1
+DatafileKind0            = PartsInfo
+DatafileDescription0     = Component Parts Information File
+DatafileEntityType0      = InfoAboutParts
+DatafileExtensionFilter0 = *.PartsInfo
