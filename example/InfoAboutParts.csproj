@@ -42,6 +42,7 @@
 
   <ItemGroup>
     <Compile Include=".\properties\AssemblyInfo.cs" />
+    <Compile Include=".\src\ComponentData.cs" />
     <Compile Include=".\src\Commands.cs" />
     <Compile Include=".\src\Main.cs" />
   </ItemGroup>

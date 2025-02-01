@@ -1,14 +1,38 @@
 PL PLInfoAboutParts:ShowInfoAboutParts
     Command     = 'InfoAboutParts:ShowInfoAboutParts'
+    Caption     = 'Selected Component Pin Report'
+    Description = 'Generate report of schematic components'
+End
+
+PL PLInfoAboutParts:GetNetsOfComponents
+    Command     = 'InfoAboutParts:GetNetsOfComponents'
+    Caption     = 'GetNetsOfComponents'
+    Description = 'Generate report of schematic components'
+End
+
+PL PLInfoAboutParts:GetAllComponents
+    Command     = 'InfoAboutParts:GetAllComponents'
     Caption     = 'Component Info Report'
+    Description = 'Generate report of schematic components'
+End
+
+PL PLInfoAboutParts:GetNetsOfSelectedComponents
+    Command     = 'InfoAboutParts:GetNetsOfSelectedComponents'
+    Caption     = 'GetNetsOfSelectedComponents'
+    Description = 'Generate report of schematic components'
+End
+
+PL PLInfoAboutParts:GetComponentData
+    Command     = 'InfoAboutParts:GetComponentData'
+    Caption     = 'GetComponentData'
     Description = 'Generate report of schematic components'
 End
 
 Insertion MNSCH_PM_ShowInfoAboutParts
     TargetID   = 'PUSCHMENU'
     InsertType = 'After'
-    RefID0     = 'MNSchematic_PUSCHMENU261'
-    Link MNSchematic_PUSCHMENU262
+    RefID0     = 'MNSchematic_PUSCHMENU255'
+    Link MNSchematic_PUSCHMENU256
         PLID = 'PLInfoAboutParts:ShowInfoAboutParts'
     End
 End
@@ -16,9 +40,36 @@ End
 Insertion MNSCH_PM_ShowInfoAboutParts
     TargetID   = 'PUSCHMENU'
     InsertType = 'After'
-    RefID0     = 'MNSchematic_PUSCHMENU261'
-    Link MNSchematic_PUSCHMENU263
+    RefID0     = 'MNSchematic_PUSCHMENU255'
+    Link MNSchematic_PUSCHMENU257
         PLID = 'PLInfoAboutParts:GetAllComponents'
+    End
+End
+
+Insertion MNSCH_PM_ShowInfoAboutParts
+    TargetID   = 'PUSCHMENU'
+    InsertType = 'After'
+    RefID0     = 'MNSchematic_PUSCHMENU255'
+    Link MNSchematic_PUSCHMENU258
+        PLID = 'PLInfoAboutParts:GetNetsOfComponents'
+    End
+End
+
+Insertion MNSCH_PM_ShowInfoAboutParts
+    TargetID   = 'PUSCHMENU'
+    InsertType = 'After'
+    RefID0     = 'MNSchematic_PUSCHMENU255'
+    Link MNSchematic_PUSCHMENU259
+        PLID = 'PLInfoAboutParts:GetNetsOfSelectedComponents'
+    End
+End
+
+Insertion MNSCH_PM_ShowInfoAboutParts
+    TargetID   = 'PUSCHMENU'
+    InsertType = 'After'
+    RefID0     = 'MNSchematic_PUSCHMENU255'
+    Link MNSchematic_PUSCHMENU260
+        PLID = 'PLInfoAboutParts:GetComponentData'
     End
 End
 
