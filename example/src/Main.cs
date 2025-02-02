@@ -7,6 +7,9 @@ using System.Windows.Forms;
 using DXP;
 using EDP;
 
+using EPSA;
+using ComponentData;
+
 namespace CSharpPlugin
 {
     public interface IPluginFactory
@@ -39,6 +42,7 @@ namespace CSharpPlugin
             ((CommandLauncher)CommandLauncher).RegisterCommand("GetNetsOfComponents",this.Command_GetNetsOfComponents);
             ((CommandLauncher)CommandLauncher).RegisterCommand("GetNetsOfSelectedComponents",this.Command_GetNetsOfSelectedComponents);
             ((CommandLauncher)CommandLauncher).RegisterCommand("GetComponentData",this.Command_GetComponentData);
+            ((CommandLauncher)CommandLauncher).RegisterCommand("OpenEPSA",this.Command_OpenEPSA);
         }
 
         private void Command_InfoAboutParts(IServerDocumentView argView, ref string argParameters)
@@ -63,8 +67,20 @@ namespace CSharpPlugin
 
         private void Command_GetComponentData(IServerDocumentView argView, ref string argParameters)
         {
+            DXP.GlobalVars.DXPWorkSpace.DM_AddOutputLine("Command_GetComponentData", false, false);
             bool compSelection = false;
-            new Commands().Command_GetComponentData(argView, argParameters, compSelection);
+            //new Commands().Command_GetComponentData(argView, argParameters, compSelection);
+            // Create the object
+            ComponentDataExtractor extractor = new ComponentDataExtractor(compSelection);
+            // Run it when ready
+            extractor.Run();
+        }
+
+        private void Command_OpenEPSA(IServerDocumentView argView, ref string argParameters)
+        {
+            DXP.GlobalVars.DXPWorkSpace.DM_AddOutputLine("Command_OpenEPSA", false, false);
+            EPSAOpener app = new EPSAOpener();
+            app.ExecuteAsync().GetAwaiter().GetResult();
         }
 
         protected override IServerDocument NewDocumentInstance(string argKind, string argFileName)

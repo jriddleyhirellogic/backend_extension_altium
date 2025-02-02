@@ -16,6 +16,12 @@ using ComponentData;
 
 public class Commands 
 {
+    List<ComponentSchematic> compDataList = new List<ComponentSchematic>();
+
+    public static void Log(string text) {
+        DXP.GlobalVars.DXPWorkSpace.DM_AddOutputLine(text, false, false);
+    }
+    
     public void Command_InfoAboutParts(IServerDocumentView argView, string argParameters)
     {
         if (CheckKindSCH(argView))
@@ -442,7 +448,7 @@ public class Commands
             object dispatch;
             SCH.TObjectId ObjectId;
             IProject proj;
-            List<ComponentSchematic> compDataList = new List<ComponentSchematic>();
+            //List<ComponentSchematic> compDataList = new List<ComponentSchematic>();
 
             IClient client = DXP.GlobalVars.Client;
             if (client == null)
@@ -492,10 +498,9 @@ public class Commands
                                         //compInfo.Add(comp.DM_FullLogicalDesignator());
                                         //compInfo.Add(schComponent.GetState_DesignItemId());
 
-                                        ComponentSchematic componentData = new ComponentSchematic
+                                        ComponentSchematic componentDataFromSchematic = new ComponentSchematic(comp.DM_FullLogicalDesignator())
                                         {
                                             UniqueID = comp.DM_UniqueId(),
-                                            Designator = comp.DM_FullLogicalDesignator(),
                                             GenericPartnumber = schComponent.GetState_DesignItemId(),
                                             Description = schComponent.GetState_ComponentDescription()
                                         };
@@ -509,7 +514,7 @@ public class Commands
                                             //compInfo.Add(pin.DM_PartType());
                                             //compInfo.Add(pin.DM_SheetName());
 
-                                            componentData.Pins[pin.DM_PinNumber()] = new PinInfo(
+                                            componentDataFromSchematic.Pins[pin.DM_PinNumber()] = new PinInfo(
                                                 name: pin.DM_PinName(),
                                                 designator: pin.DM_PinNumber(),
                                                 net: pin.DM_FlattenedNetName()
@@ -517,7 +522,7 @@ public class Commands
                                             
                                         }                    
                                         
-                                        compDataList.Add(componentData);
+                                        compDataList.Add(componentDataFromSchematic);
                                     }
                                     else if (comp.DM_SubPartCount() > 1)
                                     {
@@ -529,13 +534,13 @@ public class Commands
                                             //compInfo.Add(comp.DM_FullLogicalDesignator());
                                             //compInfo.Add(schComponent.GetState_DesignItemId());
 
-                                            ComponentSchematic componentData = new ComponentSchematic
+                                            ComponentSchematic componentDataFromSchematic = new ComponentSchematic(comp.DM_FullLogicalDesignator())
                                             {
                                                 UniqueID = comp.DM_UniqueId(),
-                                                Designator = comp.DM_FullLogicalDesignator(),
                                                 GenericPartnumber = schComponent.GetState_DesignItemId(),
                                                 Description = schComponent.GetState_ComponentDescription()
-                                            };                                            
+                                            };
+                                         
 
                                             for (k = 0; k < multiPart.DM_PinCount(); k++)
                                             {
@@ -548,7 +553,7 @@ public class Commands
                                                     //compInfo.Add(pin.DM_PartType());
                                                     //compInfo.Add(pin.DM_SheetName());
 
-                                                    componentData.Pins[pin.DM_PinNumber()] = new PinInfo(
+                                                    componentDataFromSchematic.Pins[pin.DM_PinNumber()] = new PinInfo(
                                                         name: pin.DM_PinName(),
                                                         designator: pin.DM_PinNumber(),
                                                         net: pin.DM_FlattenedNetName()
@@ -557,7 +562,7 @@ public class Commands
                                                 }
                                             }
 
-                                             compDataList.Add(componentData);
+                                             compDataList.Add(componentDataFromSchematic);
                                         }
                                     }
                                 }    
@@ -572,6 +577,7 @@ public class Commands
             {
                 compInfo.Add($"Component: {component.Designator}");
                 compInfo.Add($" Part: {component.GenericPartnumber}");
+                compInfo.Add($" Part Type: {component.PartType}");
                 foreach (var pinEntry in component.Pins)
                 {
                     compInfo.Add($"  Pin {pinEntry.Key}: Name={pinEntry.Value.Name}: Net={pinEntry.Value.Net}");
@@ -586,7 +592,6 @@ public class Commands
                 client.ShowDocument(reportDocument);
 
         }
-
         /*
         public void FetchNetsFromFocussedDocumentOnlyAndGenerateParameters(
             List<string> compInfo, 
