@@ -33,15 +33,16 @@
 
   <ItemGroup>
     <Reference Include="Altium.SDK">
-      <HintPath>C:\Program Files\Altium\AD20\System\Altium.SDK.dll</HintPath>
+      <HintPath>C:\Program Files\Altium\AD24\System\Altium.SDK.dll</HintPath>
     </Reference>
     <Reference Include="Altium.SDK.Interfaces">
-      <HintPath>C:\Program Files\Altium\AD20\System\Altium.SDK.Interfaces.dll</HintPath>
+      <HintPath>C:\Program Files\Altium\AD24\System\Altium.SDK.Interfaces.dll</HintPath>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include=".\properties\AssemblyInfo.cs" />
+    <Compile Include=".\src\EPSA.cs" />
     <Compile Include=".\src\ComponentData.cs" />
     <Compile Include=".\src\Commands.cs" />
     <Compile Include=".\src\Main.cs" />

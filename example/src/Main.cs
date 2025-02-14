@@ -6,9 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using DXP;
 using EDP;
-
-using EPSA;
-using ComponentData;
+using AltiumCommandsLibrary;
 
 namespace CSharpPlugin
 {
@@ -47,40 +45,32 @@ namespace CSharpPlugin
 
         private void Command_InfoAboutParts(IServerDocumentView argView, ref string argParameters)
         {
-            new Commands().Command_InfoAboutParts(argView, argParameters);
+            new Commands().InfoAboutParts(argView, argParameters);
         }
 
         private void Command_GetAllComponents(IServerDocumentView argView, ref string argParameters)
         {
-            new Commands().Command_GetAllComponents(argView, argParameters);
+            new Commands().GetAllComponents();
         }
 
         private void Command_GetNetsOfComponents(IServerDocumentView argView, ref string argParameters)
         {
-            new Commands().Command_GetNetsOfComponents(argView, argParameters);
+            new Commands().GetNetsOfComponents();
         }
 
         private void Command_GetNetsOfSelectedComponents(IServerDocumentView argView, ref string argParameters)
         {
-            new Commands().Command_GetNetsOfSelectedComponents(argView, argParameters);
+            new Commands().GetNetsOfSelectedComponents();
         }
 
         private void Command_GetComponentData(IServerDocumentView argView, ref string argParameters)
         {
-            DXP.GlobalVars.DXPWorkSpace.DM_AddOutputLine("Command_GetComponentData", false, false);
-            bool compSelection = false;
-            //new Commands().Command_GetComponentData(argView, argParameters, compSelection);
-            // Create the object
-            ComponentDataExtractor extractor = new ComponentDataExtractor(compSelection);
-            // Run it when ready
-            extractor.Run();
+            new Commands().GetComponentData();
         }
 
         private void Command_OpenEPSA(IServerDocumentView argView, ref string argParameters)
         {
-            DXP.GlobalVars.DXPWorkSpace.DM_AddOutputLine("Command_OpenEPSA", false, false);
-            EPSAOpener app = new EPSAOpener();
-            app.ExecuteAsync().GetAwaiter().GetResult();
+            new Commands().OpenEPSA();
         }
 
         protected override IServerDocument NewDocumentInstance(string argKind, string argFileName)
